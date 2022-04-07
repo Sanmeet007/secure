@@ -122,9 +122,13 @@ encForm.addEventListener("submit", (e) => {
   const salt = encForm["enc-salt"].value;
   const password = encForm["normal-password"].value;
   const type =
-    encForm.encryption.value === "" ? "AES" : dencForm.decryption.value;
-  const encryptedPassword = CryptoJS[type].encrypt(password, salt);
-  encText.textContent = encryptedPassword || "Invalid Credentials";
+    encForm.encryption.value === "" ? "AES" : encForm.encryption.value;
+  try {
+    const encryptedPassword = CryptoJS[type].encrypt(password, salt);
+    encText.textContent = encryptedPassword || "Invalid Credentials";
+  } catch (E) {
+    encText.textContent = "Invalid Credentials";
+  }
 });
 
 encForm.addEventListener("reset", (e) => {
@@ -164,9 +168,13 @@ dencForm.addEventListener("submit", (e) => {
   const password = dencForm["enc-password"].value;
   const type =
     dencForm.decryption.value === "" ? "AES" : dencForm.decryption.value;
-  const dencryptedPassword = CryptoJS[type].decrypt(password, salt);
-  dencText.textContent =
-    dencryptedPassword.toString(CryptoJS.enc.Utf8) || "Invalid Credentials";
+  try {
+    const dencryptedPassword = CryptoJS[type].decrypt(password, salt);
+    dencText.textContent =
+      dencryptedPassword.toString(CryptoJS.enc.Utf8) || "Invalid Credentials";
+  } catch (E) {
+    dencText.textContent = "Invalid Credentials";
+  }
 });
 
 dencForm.addEventListener("reset", () => {
