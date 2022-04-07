@@ -152,7 +152,6 @@ encForm.addEventListener("reset", (e) => {
 dencForm.decryption.addEventListener("change", (e) => {
   dencDiv.querySelectorAll("div").forEach((div) => {
     if (div.getAttribute("data-name") === dencForm.decryption.value) {
-      console.log("a");
       div.classList.add("display");
     } else {
       div.classList.remove("display");
